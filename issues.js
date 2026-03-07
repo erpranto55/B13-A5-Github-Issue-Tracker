@@ -68,14 +68,14 @@ ${issue.createdAt}
 }
 
 function filterIssues(type) {
+  let filtered = [];
   if (type === "all") {
-    displayIssues(allIssues);
+    filtered = allIssues;
   } else {
-    const filtered = allIssues.filter((issue) => issue.status === type);
-    displayIssues(filtered);
-    document.getElementById("issueCount").innerText =
-      filtered.length + " Issues";
+    filtered = allIssues.filter((issue) => issue.status === type);
   }
+  displayIssues(filtered);
+  document.getElementById("issueCount").innerText = filtered.length + " Issues";
 }
 
 function openModal(issue) {
@@ -101,12 +101,20 @@ function openModal(issue) {
 }
 
 async function searchIssues() {
-  const text = document.getElementById("searchInput").value;
+  const text = document.getElementById("searchInput").value.trim();
+  if (text === "") {
+    displayIssues(allIssues);
+    document.getElementById("issueCount").innerText =
+      allIssues.length + " Issues";
+    return;
+  }
   const res = await fetch(
     `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`,
   );
   const data = await res.json();
   displayIssues(data.data);
+  document.getElementById("issueCount").innerText =
+    data.data.length + " Issues";
 }
 
 fetchIssues();
