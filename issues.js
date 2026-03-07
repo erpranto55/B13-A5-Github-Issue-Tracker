@@ -21,8 +21,8 @@ function displayIssues(issues) {
     let borderColor =
       issue.status === "open" ? "border-green-500" : "border-purple-500";
 
-    let statusDot =
-      issue.status === "open" ? "text-green-500" : "text-purple-500";
+    let statusIcon =
+      issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed- Status .png";
 
     let priorityColor = "";
     if (issue.priority === "high") {
@@ -37,7 +37,7 @@ function displayIssues(issues) {
     card.className = `bg-white rounded-lg shadow p-4 border-t-4 ${borderColor} cursor-pointer hover:shadow-lg transition`;
     card.innerHTML = `
 <div class="flex justify-between items-center mb-2">
-<span class="${statusDot} text-sm">●</span>
+<img src="${statusIcon}" class="w-6 h-6" />
 <span class="px-3 py-1 text-xs rounded-full ${priorityColor}">
 ${issue.priority.toUpperCase()}
 </span>
