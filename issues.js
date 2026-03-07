@@ -75,7 +75,21 @@ function filterIssues(type) {
     filtered = allIssues.filter((issue) => issue.status === type);
   }
   displayIssues(filtered);
+
   document.getElementById("issueCount").innerText = filtered.length + " Issues";
+
+  document
+    .getElementById("allTab")
+    .classList.remove("bg-purple-600", "text-white", "border-none");
+  document
+    .getElementById("openTab")
+    .classList.remove("bg-purple-600", "text-white", "border-none");
+  document
+    .getElementById("closedTab")
+    .classList.remove("bg-purple-600", "text-white", "border-none");
+  document
+    .getElementById(type + "Tab")
+    .classList.add("bg-purple-600", "text-white", "border-none");
 }
 
 function openModal(issue) {
@@ -84,7 +98,8 @@ function openModal(issue) {
   document.getElementById("modalAuthor").innerText = issue.author;
   document.getElementById("modalCreated").innerText = issue.createdAt;
   document.getElementById("modalAssignee").innerText = issue.author;
-  document.getElementById("modalStatus").innerText = issue.status;
+  document.getElementById("modalStatus").innerText =
+    issue.status.charAt(0).toUpperCase() + issue.status.slice(1);
 
   const modalPriority = document.getElementById("modalPriority");
   modalPriority.innerText = issue.priority.toUpperCase();
@@ -118,3 +133,11 @@ async function searchIssues() {
 }
 
 fetchIssues();
+
+document
+  .getElementById("searchInput")
+  .addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      searchIssues();
+    }
+  });
