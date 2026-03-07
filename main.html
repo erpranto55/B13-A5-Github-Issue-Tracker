@@ -22,25 +22,48 @@
 
       <div class="flex gap-3">
         <input
+          id="searchInput"
           type="text"
           placeholder="Search issues..."
           class="input input-bordered input-sm w-64"
         />
-        <button class="btn btn-primary btn-sm">+ New Issue</button>
+        <button onclick="searchIssues()" class="btn btn-primary btn-sm">
+          + New Issue
+        </button>
       </div>
     </nav>
 
     <main class="max-w-[80%] mx-auto my-[60px]">
       <!-- Tabs Section -->
-      <div class="flex gap-2 mb-4">
-        <button class="btn btn-sm btn-primary">All</button>
-        <button class="btn btn-sm btn-outline">Open</button>
-        <button class="btn btn-sm btn-outline">Closed</button>
+      <div class="flex gap-3 mb-6">
+        <button
+          id="allTab"
+          onclick="filterIssues('all')"
+          class="btn btn-sm bg-purple-600 text-white border-none"
+        >
+          All
+        </button>
+
+        <button
+          id="openTab"
+          onclick="filterIssues('open')"
+          class="btn btn-sm btn-outline"
+        >
+          Open
+        </button>
+
+        <button
+          id="closedTab"
+          onclick="filterIssues('closed')"
+          class="btn btn-sm btn-outline"
+        >
+          Closed
+        </button>
       </div>
 
       <!-- Issues -->
       <div
-        class="flex justify-between items-center bg-white p-4 rounded shadow mb-6"
+        class="flex justify-between items-center bg-white p-5 rounded shadow mb-6"
       >
         <div>
           <h2 id="issueCount" class="font-semibold text-lg">Issues</h2>
@@ -71,28 +94,27 @@
       <dialog id="issueModal" class="modal">
         <div class="modal-box">
           <h3 id="modalTitle" class="font-bold text-lg mb-2"></h3>
-
           <p id="modalDescription" class="text-sm text-gray-600 mb-3"></p>
 
-          <div class="mb-2">
-            <strong>Status:</strong>
-            <span id="modalStatus"></span>
-          </div>
-
-          <div class="mb-2">
+          <p>
             <strong>Author:</strong>
             <span id="modalAuthor"></span>
-          </div>
+          </p>
 
-          <div class="mb-2">
+          <p>
+            <strong>Status:</strong>
+            <span id="modalStatus"></span>
+          </p>
+
+          <p>
             <strong>Priority:</strong>
             <span id="modalPriority"></span>
-          </div>
+          </p>
 
-          <div class="mb-2">
+          <p>
             <strong>Created:</strong>
             <span id="modalCreated"></span>
-          </div>
+          </p>
 
           <div class="modal-action">
             <form method="dialog">

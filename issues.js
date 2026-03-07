@@ -38,8 +38,8 @@ ${issue.description.substring(0, 90)}...
 </p>
 
 <div class="flex gap-2 mb-3 text-xs">
-<span class="badge badge-outline badge-error">BUG</span>
-<span class="badge badge-outline badge-warning">HELP WANTED</span>
+<span class="badge badge-outline badge-error bg-[#FECACA] font-[#FEECEC] rounded-[100px]">BUG</span>
+<span class="badge badge-outline badge-warning bg-[#FDE68A] font-[#D97706] rounded-[100px]">HELP WANTED</span>
 </div>
 
 <div class="text-xs text-gray-400">
@@ -53,6 +53,41 @@ ${issue.createdAt}
   });
 }
 
+function loadIssues(type) {
+  if (type === "all") {
+    displayIssues(allIssues);
+  } else {
+    const filtered = allIssues.filter((issue) => issue.status === type);
+    displayIssues(filtered);
+  }
+}
 
+function openModal(issue) {
+  document.getElementById("modalTitle").innerText = issue.title;
+
+  document.getElementById("modalDescription").innerText = issue.description;
+
+  document.getElementById("modalStatus").innerText = issue.status;
+
+  document.getElementById("modalAuthor").innerText = issue.author;
+
+  document.getElementById("modalPriority").innerText = issue.priority;
+
+  document.getElementById("modalCreated").innerText = issue.createdAt;
+
+  document.getElementById("issueModal").showModal();
+}
+
+async function searchIssues() {
+  const text = document.getElementById("searchInput").value;
+
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`,
+  );
+
+  const data = await res.json();
+
+  displayIssues(data.data);
+}
 
 fetchIssues();
