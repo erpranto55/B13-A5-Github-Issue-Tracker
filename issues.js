@@ -73,6 +73,8 @@ function filterIssues(type) {
   } else {
     const filtered = allIssues.filter((issue) => issue.status === type);
     displayIssues(filtered);
+    document.getElementById("issueCount").innerText =
+      filtered.length + " Issues";
   }
 }
 
