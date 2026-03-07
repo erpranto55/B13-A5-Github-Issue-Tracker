@@ -21,6 +21,9 @@ function displayIssues(issues) {
     let borderColor =
       issue.status === "open" ? "border-green-500" : "border-purple-500";
 
+    let statusDot =
+      issue.status === "open" ? "text-green-500" : "text-purple-500";
+
     let priorityColor = "";
     if (issue.priority === "high") {
       priorityColor = "bg-red-100 text-red-500";
@@ -34,7 +37,7 @@ function displayIssues(issues) {
     card.className = `bg-white rounded-lg shadow p-4 border-t-4 ${borderColor} cursor-pointer hover:shadow-lg transition`;
     card.innerHTML = `
 <div class="flex justify-between items-center mb-2">
-<span class="text-green-500 text-sm">●</span>
+<span class="${statusDot} text-sm">●</span>
 <span class="px-3 py-1 text-xs rounded-full ${priorityColor}">
 ${issue.priority.toUpperCase()}
 </span>
@@ -49,8 +52,8 @@ ${issue.description.substring(0, 90)}...
 </p>
 
 <div class="flex gap-2 mb-3 text-xs">
-<span class="badge badge-outline badge-error bg-[#FECACA] font-[#FEECEC] rounded-[100px]">BUG</span>
-<span class="badge badge-outline badge-warning bg-[#FDE68A] font-[#D97706] rounded-[100px]">HELP WANTED</span>
+<span class="px-2 py-1 rounded-full bg-red-100 text-red-500">BUG</span>
+<span class="px-2 py-1 rounded-full bg-yellow-100 text-yellow-600">HELP WANTED</span>
 </div>
 
 <div class="text-xs text-gray-400">
@@ -76,10 +79,22 @@ function filterIssues(type) {
 function openModal(issue) {
   document.getElementById("modalTitle").innerText = issue.title;
   document.getElementById("modalDescription").innerText = issue.description;
-  document.getElementById("modalStatus").innerText = issue.status;
   document.getElementById("modalAuthor").innerText = issue.author;
-  document.getElementById("modalPriority").innerText = issue.priority;
   document.getElementById("modalCreated").innerText = issue.createdAt;
+  document.getElementById("modalAssignee").innerText = issue.author;
+  document.getElementById("modalStatus").innerText = issue.status;
+
+  const modalPriority = document.getElementById("modalPriority");
+  modalPriority.innerText = issue.priority.toUpperCase();
+  modalPriority.className = "px-3 py-1 text-xs rounded-full";
+  if (issue.priority === "high") {
+    modalPriority.classList.add("bg-red-500", "text-white");
+  } else if (issue.priority === "medium") {
+    modalPriority.classList.add("bg-yellow-400", "text-black");
+  } else {
+    modalPriority.classList.add("bg-gray-400", "text-white");
+  }
+
   document.getElementById("issueModal").showModal();
 }
 

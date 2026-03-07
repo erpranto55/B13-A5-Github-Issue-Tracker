@@ -92,33 +92,65 @@
 
       <!-- Model -->
       <dialog id="issueModal" class="modal">
-        <div class="modal-box">
+        <div class="modal-box max-w-xl">
+          <!-- Title -->
           <h3 id="modalTitle" class="font-bold text-lg mb-2"></h3>
-          <p id="modalDescription" class="text-sm text-gray-600 mb-3"></p>
 
-          <p>
-            <strong>Author:</strong>
-            <span id="modalAuthor"></span>
-          </p>
+          <!-- Status + Author + Date -->
+          <div class="flex items-center gap-2 text-sm mb-3">
+            <span
+              id="modalStatus"
+              class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600"
+            >
+            </span>
 
-          <p>
-            <strong>Status:</strong>
-            <span id="modalStatus"></span>
-          </p>
+            <span class="text-gray-500">
+              • Opened by
+              <span id="modalAuthor"></span>
+            </span>
 
-          <p>
-            <strong>Priority:</strong>
-            <span id="modalPriority"></span>
-          </p>
+            <span class="text-gray-400">
+              • <span id="modalCreated"></span>
+            </span>
+          </div>
 
-          <p>
-            <strong>Created:</strong>
-            <span id="modalCreated"></span>
-          </p>
+          <!-- Labels -->
+          <div class="flex gap-2 mb-3 text-xs">
+            <span class="px-2 py-1 rounded-full bg-red-100 text-red-500">
+              BUG
+            </span>
 
+            <span class="px-2 py-1 rounded-full bg-yellow-100 text-yellow-600">
+              HELP WANTED
+            </span>
+          </div>
+
+          <!-- Description -->
+          <p id="modalDescription" class="text-sm text-gray-600 mb-5"></p>
+
+          <!-- Assignee + Priority -->
+          <div class="bg-gray-100 p-4 rounded-lg flex justify-between items-center text-sm">
+            <div>
+              <p class="text-gray-500">Assignee:</p>
+              <p id="modalAssignee" class="font-medium"></p>
+            </div>
+
+            <div>
+              <p class="text-gray-500">Priority:</p>
+              <span
+                id="modalPriority"
+                class="px-3 py-1 text-xs rounded-full bg-red-500 text-white"
+              >
+              </span>
+            </div>
+          </div>
+
+          <!-- Close Button -->
           <div class="modal-action">
             <form method="dialog">
-              <button class="btn">Close</button>
+              <button class="btn bg-purple-600 text-white border-none">
+                Close
+              </button>
             </form>
           </div>
         </div>
