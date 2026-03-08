@@ -35,6 +35,34 @@ function displayIssues(issues) {
       priorityColor = "bg-gray-200 text-gray-500";
     }
 
+    let labelsHTML = "";
+
+    issue.labels.forEach((label) => {
+      if (label === "bug") {
+        labelsHTML += `
+      <span class="px-2 py-1 rounded-full bg-red-100 text-red-500 flex items-center gap-1">
+        <i class="fa-solid fa-bug"></i> BUG
+      </span>
+    `;
+      }
+
+      if (label === "help wanted") {
+        labelsHTML += `
+      <span class="px-2 py-1 rounded-full bg-yellow-100 text-yellow-600 flex items-center gap-1">
+        <i class="fa-regular fa-circle-question"></i> HELP WANTED
+      </span>
+    `;
+      }
+
+      if (label === "enhancement") {
+        labelsHTML += `
+      <span class="px-2 py-1 rounded-full bg-green-100 text-green-600 flex items-center gap-1">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> ENHANCEMENT
+      </span>
+    `;
+      }
+    });
+
     const card = document.createElement("div");
     card.className = `bg-white rounded-lg shadow p-4 border-t-4 ${borderColor} cursor-pointer hover:shadow-lg transition`;
     card.innerHTML = `
@@ -54,12 +82,11 @@ ${issue.description.substring(0, 90)}...
 </p>
 
 <div class="flex gap-2 mb-3 text-xs">
-<span class="px-2 py-1 rounded-full bg-red-100 text-red-500">BUG</span>
-<span class="px-2 py-1 rounded-full bg-yellow-100 text-yellow-600">HELP WANTED</span>
+${labelsHTML}
 </div>
 
 <div class="text-xs text-gray-400">
-#1 by ${issue.author}  
+#${issue.id} by ${issue.author}
 <br>
 ${issue.createdAt.split("T")[0]}
 </div>
@@ -101,8 +128,15 @@ function openModal(issue) {
   document.getElementById("modalCreated").innerText =
     issue.createdAt.split("T")[0];
   document.getElementById("modalAssignee").innerText = issue.author;
-  document.getElementById("modalStatus").innerText =
+
+  const modalStatus = document.getElementById("modalStatus");
+  modalStatus.innerText =
     issue.status.charAt(0).toUpperCase() + issue.status.slice(1);
+  modalStatus.className =
+    "px-2 py-1 text-xs rounded-full " +
+    (issue.status === "open"
+      ? "bg-green-100 text-green-600"
+      : "bg-purple-100 text-purple-600");
 
   const modalPriority = document.getElementById("modalPriority");
   modalPriority.innerText = issue.priority.toUpperCase();
@@ -114,6 +148,35 @@ function openModal(issue) {
   } else {
     modalPriority.classList.add("bg-gray-400", "text-white");
   }
+
+  const labelsContainer = document.getElementById("modalLabels");
+  labelsContainer.innerHTML = "";
+
+  issue.labels.forEach((label) => {
+    if (label === "bug") {
+      labelsContainer.innerHTML += `
+      <span class="px-2 py-1 rounded-full bg-red-100 text-red-500 flex items-center gap-1">
+        <i class="fa-solid fa-bug"></i> BUG
+      </span>
+    `;
+    }
+    if (label === "help wanted") {
+      labelsContainer.innerHTML += `
+      <span class="px-2 py-1 rounded-full bg-yellow-100 text-yellow-600 flex items-center gap-1">
+        <i class="fa-regular fa-circle-question"></i> HELP WANTED
+      </span>
+    `;
+    }
+    if (label === "enhancement") {
+      labelsContainer.innerHTML += `
+      <span class="px-2 py-1 rounded-full bg-green-100 text-green-600 flex items-center gap-1">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> ENHANCEMENT
+      </span>
+    `;
+    }
+  });
+  
+  
 
   document.getElementById("issueModal").showModal();
 }
