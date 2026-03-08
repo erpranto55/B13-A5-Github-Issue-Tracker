@@ -96,7 +96,7 @@ function openModal(issue) {
   document.getElementById("modalTitle").innerText = issue.title;
   document.getElementById("modalDescription").innerText = issue.description;
   document.getElementById("modalAuthor").innerText = issue.author;
-  document.getElementById("modalCreated").innerText = issue.createdAt;
+  document.getElementById("modalCreated").innerText = issue.createdAt.split("T")[0];
   document.getElementById("modalAssignee").innerText = issue.author;
   document.getElementById("modalStatus").innerText =
     issue.status.charAt(0).toUpperCase() + issue.status.slice(1);
