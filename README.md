@@ -34,4 +34,9 @@ Example: `const add = (a,b) => a + b;`<br>
 ### 5️⃣ What are template literals?
 
 It's used to create strings with embedded variables. Need to use backticks(``) instead of quotes.<br>
-Example: `const name = "John";`<br>`console.log(\`Hello \${name}\`);`<br>
+Example:
+
+```javascript
+const name = "John";
+console.log(`Hello ${name}`);
+```
