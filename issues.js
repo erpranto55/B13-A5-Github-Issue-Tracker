@@ -22,7 +22,9 @@ function displayIssues(issues) {
       issue.status === "open" ? "border-green-500" : "border-purple-500";
 
     let statusIcon =
-      issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed- Status .png";
+      issue.status === "open"
+        ? "./assets/Open-Status.png"
+        : "./assets/Closed-Status.png";
 
     let priorityColor = "";
     if (issue.priority === "high") {
@@ -59,7 +61,7 @@ ${issue.description.substring(0, 90)}...
 <div class="text-xs text-gray-400">
 #1 by ${issue.author}  
 <br>
-${issue.createdAt}
+${issue.createdAt.split("T")[0]}
 </div>
 `;
     card.onclick = () => openModal(issue);
@@ -96,7 +98,8 @@ function openModal(issue) {
   document.getElementById("modalTitle").innerText = issue.title;
   document.getElementById("modalDescription").innerText = issue.description;
   document.getElementById("modalAuthor").innerText = issue.author;
-  document.getElementById("modalCreated").innerText = issue.createdAt.split("T")[0];
+  document.getElementById("modalCreated").innerText =
+    issue.createdAt.split("T")[0];
   document.getElementById("modalAssignee").innerText = issue.author;
   document.getElementById("modalStatus").innerText =
     issue.status.charAt(0).toUpperCase() + issue.status.slice(1);
@@ -130,6 +133,10 @@ async function searchIssues() {
   displayIssues(data.data);
   document.getElementById("issueCount").innerText =
     data.data.length + " Issues";
+
+  document
+    .getElementById("allTab")
+    .classList.add("bg-purple-600", "text-white", "border-none");
 }
 
 fetchIssues();
