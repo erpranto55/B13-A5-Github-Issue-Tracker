@@ -9,7 +9,7 @@
 2. let- let is the smartest way to declare a variable and the value can be changed on the function again.<br>
    Example: `let b = 20;`<br>
 3. const- const is the way to declare a fixed value variable. If we declare a variable and initialized it , the value can't be changed.<br>
-   Example: `const  = 30;`<br>
+   Example: `const c = 30;`<br>
 
 ### 2️⃣ What is the spread operator (...)?
 
@@ -34,4 +34,4 @@ Example: `const add = (a,b) => a + b;`<br>
 ### 5️⃣ What are template literals?
 
 It's used to create strings with embedded variables. Need to use backticks(``) instead of quotes.<br>
-Example:`const name = "John";`<br>`console.log(`Hello ${name}`)`;<br>
+Example: `const name = "John";`<br>`console.log(\`Hello \${name}\`);`<br>
