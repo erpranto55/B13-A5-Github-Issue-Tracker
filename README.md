@@ -21,10 +21,12 @@ The Spread operator(...) used to expand the value or elements of an array or an 
 2. filter() - It creates a new array by filtering using the condition provided.<br>
 3. forEach() - Its a loop that goes through an array but does not return anything.<br>
 
-Example:`const numbers = [1,2,3,4];
+Example:`const numbers = [1,2,3,4];`
+`numbers.map(n => n * 2); // [2,4,6,8]`
+`numbers.filter(n => n > 2); // [3,4]`
+`numbers.forEach(n => console.log(n));`<br>
 
-numbers.map(n => n * 2); // [2,4,6,8]
-numbers.filter(n => n > 2); // [3,4]
-numbers.forEach(n => console.log(n));`<br>
+### 4️⃣ What is an arrow function?
 
-
+It's a sorter way to write a function.
+Example: `const add = (a,b) => a + b;`
