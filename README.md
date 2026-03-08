@@ -11,9 +11,20 @@
 3. const- const is the way to declare a fixed value variable. If we declare a variable and initialized it , the value can't be changed.<br>
    Example: `const  = 30;`<br>
 
-## 2️⃣ What is the spread operator (...)?
+### 2️⃣ What is the spread operator (...)?
 
 The Spread operator(...) used to expand the value or elements of an array or an object.
 
-##
+### 3️⃣ What is the difference between map(), filter(), and forEach()?
+
+1. map()- It creates a new array by traversing all the elements.'<br>
+2. filter() - It creates a new array by filtering using the condition provided.<br>
+3. forEach() - Its a loop that goes through an array but does not return anything.<br>
+
+Example:`const numbers = [1,2,3,4];
+
+numbers.map(n => n * 2); // [2,4,6,8]
+numbers.filter(n => n > 2); // [3,4]
+numbers.forEach(n => console.log(n));`<br>
+
 
